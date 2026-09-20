@@ -196,8 +196,9 @@
             box.onclick = null; // বারবার ক্লিক বন্ধ করা
 
             box.innerHTML = `
-                <video src="${videoList[index].videoUrl}" controls autoplay playsinline></video>
-            `;
+    <video src="${videoList[index].videoUrl}" controls autoplay playsinline webkit-playsinline x5-playsinline style="width:100%; height:100%; object-fit:contain;"></video>
+`;
+            
         }
     </script>
         <script>
