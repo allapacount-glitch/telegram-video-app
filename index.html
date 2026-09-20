@@ -3,84 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Style Video Hub with Ads</title>
+    <title>Telegram Video Player</title>
+    <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-    <!-- ========================================================= -->
-    <!-- 1. ADSTERRA / MONETAG HEADER SCRIPT (এখানে আপনার স্ক্রিপ্ট কোড বসাবেন) -->
-    <!-- ========================================================= -->
-
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
-            background-color: #0f0f0f;
+            background-color: #0f172a;
             color: #ffffff;
-            padding: 12px;
-            padding-bottom: 70px;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding-bottom: 12px;
-            border-bottom: 1px solid #272727;
-            margin-bottom: 15px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #ff0000;
-        }
-
-        /* Top Banner Ad Container */
-        .banner-ad-box {
-            background: #1f1f1f;
-            border: 1px dashed #444;
-            border-radius: 8px;
-            text-align: center;
-            padding: 10px;
-            margin-bottom: 15px;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Video Feed Grid */
-        .video-grid {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
         }
-
+        .header {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 20px;
+            color: #38bdf8;
+        }
         .video-card {
-            background: #181818;
+            width: 100%;
+            max-width: 600px;
+            background: #1e293b;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #272727;
-            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
         }
-
-        .thumbnail-box {
+        .thumbnail-container {
             position: relative;
             width: 100%;
-            padding-top: 56.25%;
-            background: #000;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background-color: #000;
         }
-
-        .thumbnail-box img {
+        .thumbnail-container img {
             position: absolute;
             top: 0;
             left: 0;
@@ -88,226 +55,106 @@
             height: 100%;
             object-fit: cover;
         }
-
-        .play-icon {
+        .play-btn {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255, 0, 0, 0.85);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-details {
-            padding: 12px;
-        }
-
-        .video-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #f1f1f1;
-            line-height: 1.4;
-            margin-bottom: 6px;
-        }
-
-        .video-meta {
-            font-size: 12px;
-            color: #aaa;
-        }
-
-        /* Ad Popup Modal */
-        .ad-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            z-index: 99999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        .ad-card {
-            background: #212121;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 20px;
-            width: 100%;
-            max-width: 340px;
-            text-align: center;
-        }
-
-        .ad-card h3 {
-            color: #ffcc00;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .ad-card p {
-            font-size: 12px;
-            color: #bbb;
-            margin-bottom: 15px;
-        }
-
-        .skip-btn {
-            width: 100%;
-            padding: 12px;
-            background: #ff0000;
+            background: rgba(56, 189, 248, 0.9);
             color: #fff;
             border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .skip-btn:disabled {
-            background: #444;
-            color: #888;
-            cursor: not-allowed;
-        }
-
-        /* Fixed Bottom Banner Ad */
-        .sticky-bottom-ad {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #111;
-            border-top: 1px solid #333;
-            text-align: center;
-            z-index: 9999;
-            min-height: 50px;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            font-size: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .play-btn:active {
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+        .video-info {
+            padding: 15px;
+        }
+        .video-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .video-desc {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        .player-container {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        iframe, video {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <div class="header">
-        <div class="logo">
-            <svg height="24" viewBox="0 0 24 24" width="24" fill="#ff0000"><path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
-            Video Zone
+        <h1> Viral Video Player 🎬</h1>
+    </div>
+
+    <!-- Video Card with Play Trigger -->
+    <div class="video-card" id="videoCard">
+        <div class="thumbnail-container">
+            <img src="https://picsum.photos/600/340" alt="Video Thumbnail">
+            <button class="play-btn" onclick="playVideoWithAd()">▶</button>
+        </div>
+        <div class="video-info">
+            <div class="video-title">🔥 এক্সক্লুসিভ ভাইরাল ভিডিও ক্লিপ</div>
+            <div class="video-desc">ভিডিওটি প্লে করতে উপরের প্লে বাটনে চাপ দিন।</div>
         </div>
     </div>
 
-    <!-- Top Banner Ad Space -->
-    <div class="banner-ad-box" id="topAdSpace">
-        <span style="color: #666; font-size: 11px;">[ Adsterra / Monetag Banner Ad ]</span>
-    </div>
-
-    <!-- Video List -->
-    <div class="video-grid" id="videoList"></div>
-
-    <!-- Sticky Bottom Ad Space -->
-    <div class="sticky-bottom-ad">
-        <span style="color: #666; font-size: 11px;">[ Bottom Banner Ad ]</span>
-    </div>
-
-    <!-- Ad Overlay / Pop-Up Modal -->
-    <div class="ad-modal" id="adModal">
-        <div class="ad-card">
-            <h3>🎁 Sponsor Advertisement</h3>
-            <p>ভিডিওটি চালু হতে ৫ সেকেন্ড সময় নেবে। অনুগ্রহ করে অপেক্ষা করুন।</p>
-            
-            <div style="background: #111; height: 150px; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center;">
-                <span style="color: #888; font-size: 12px;">[ Adsterra / Monetag Native Ad ]</span>
-            </div>
-
-            <button class="skip-btn" id="skipBtn" disabled onclick="playVideo()">Skip Ad (5)</button>
-        </div>
+    <!-- Actual Video Player -->
+    <div class="player-container" id="playerContainer">
+        <iframe id="videoIframe" src="" allowfullscreen></iframe>
     </div>
 
     <script>
-        Telegram.WebApp.ready();
-        Telegram.WebApp.expand();
+        // Telegram WebApp Initialization
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+            window.Telegram.WebApp.expand();
+        }
 
-        // আপনার Adsterra/Monetag Direct Link নিচে বসান (যদি থাকে)
-        const ADSTERRA_DIRECT_LINK = ""; 
+        // Adsterra Direct Link
+        const ADSTERRA_DIRECT_LINK = "https://www.profitableratecpmnetwork.com/f2j8mtn8qv?key=63fa3c81a5f4463c442f67a0175b62a4";
+        
+        // Demo Video URL (Change this with your video link)
+        const SAMPLE_VIDEO_URL = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
 
-        // ভিডিওর ডাটা (আপনার ইচ্ছেমতো থাম্বনেল এবং ভিডিও লিংক বসাতে পারেন)
-        const videosList = [
-            {
-                id: 1,
-                title: "নতুন এক্সক্লুসিভ মুভি ক্লিপ - Full HD",
-                thumbnail: "https://picsum.photos/600/337?random=1",
-                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-                views: "125K views • 1 day ago"
-            },
-            {
-                id: 2,
-                title: "ফ্রি ফায়ার নতুন গেমপ্লে ভিডিও",
-                thumbnail: "https://picsum.photos/600/337?random=2",
-                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-                views: "89K views • 3 hours ago"
-            }
-        ];
-
-        let targetVideoUrl = "";
-
-        const videoGrid = document.getElementById('videoList');
-        videosList.forEach((video) => {
-            const card = document.createElement('div');
-            card.className = 'video-card';
-            card.onclick = () => triggerAdAndOpenVideo(video.videoUrl);
-
-            card.innerHTML = `
-                <div class="thumbnail-box">
-                    <img src="${video.thumbnail}" alt="${video.title}">
-                    <div class="play-icon">
-                        <svg height="24" viewBox="0 0 24 24" width="24" fill="#ffffff"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                </div>
-                <div class="video-details">
-                    <div class="video-title">${video.title}</div>
-                    <div class="video-meta">${video.views}</div>
-                </div>
-            `;
-            videoGrid.appendChild(card);
-        });
-
-        function triggerAdAndOpenVideo(url) {
-            targetVideoUrl = url;
-
-            if (ADSTERRA_DIRECT_LINK && ADSTERRA_DIRECT_LINK !== "") {
+        function playVideoWithAd() {
+            // 1. Open Adsterra Direct Link in new tab/popup
+            if (ADSTERRA_DIRECT_LINK !== "") {
                 window.open(ADSTERRA_DIRECT_LINK, '_blank');
             }
 
-            const adModal = document.getElementById('adModal');
-            const skipBtn = document.getElementById('skipBtn');
-            adModal.style.display = 'flex';
-
-            let count = 5;
-            skipBtn.innerText = `Skip Ad (${count})`;
-            skipBtn.disabled = true;
-
-            const timer = setInterval(() => {
-                count--;
-                if (count > 0) {
-                    skipBtn.innerText = `Skip Ad (${count})`;
-                } else {
-                    clearInterval(timer);
-                    skipBtn.innerText = "Watch Video ▶";
-                    skipBtn.disabled = false;
-                }
-            }, 1000);
-        }
-
-        function playVideo() {
-            document.getElementById('adModal').style.display = 'none';
-            window.location.href = targetVideoUrl;
+            // 2. Hide Card and Show Video Player
+            document.getElementById('videoCard').style.display = 'none';
+            const playerContainer = document.getElementById('playerContainer');
+            const videoIframe = document.getElementById('videoIframe');
+            
+            videoIframe.src = SAMPLE_VIDEO_URL;
+            playerContainer.style.display = 'block';
         }
     </script>
 </body>
