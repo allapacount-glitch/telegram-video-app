@@ -6,148 +6,136 @@
     <title>এক্সক্লুসিভ প্রাইভেট ভিডিও HUB</title>
     <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://pl31426900.profitableratecpmnetwork.com/c0/1c/36/c01c3676384da5f3145687e4300e5055f2.js"></script>
-    <script src="https://pl31426998.profitableratecpmnetwork.com/16/30/4d/16304d490aba50e69dd23501a07794.js"></script>
+    <script src="https://pl31426900.profitableratecpmnetwork.com/c0/1c/36/c01c3676384da5f3145687e4300e5055f2.js" data-cfasync="false"></script>
+    <script src="https://pl31426998.profitableratecpmnetwork.com/16/30/4d/16304d490aba50e69dd23501a07794.js" data-cfasync="false"></script>
 
     <style>
-        /* টিকটক স্টাইল ফুল স্ক্রিন লেআউট */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #000000;
-            color: #ffffff;
+        /* টিকটক স্টাইল ফুল স্ক্রিন স্ন্যাপ ফিড */
+        html, body {
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden; /* মেইন পেজ স্ক্রল বন্ধ রেখে ফিড স্ক্রল চালু রাখা */
             user-select: none;
             -webkit-tap-highlight-color: transparent;
-            overflow-x: hidden;
         }
 
-        /* হেডার ডিজাইন */
-        .header {
-            width: 100%;
-            max-width: 450px;
-            text-align: center;
-            background: linear-gradient(180deg, #e50914 0%, #161b22 100%);
-            padding: 14px 10px;
-            margin-bottom: 10px;
-            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.3);
-            box-sizing: border-box;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            z-index: 10;
-        }
-
-        .header h1 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 0;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-        }
-
-        .header p {
-            font-size: 12px;
-            color: #ffcc00;
-            margin: 5px 0 0;
-            font-weight: 700;
-        }
-
-        /* ভিডিও ফিড কন্টেইনার */
+        /* টিকটক স্টাইল ফুলস্ক্রিন ফিড কন্টেইনার */
         #videoFeed {
             width: 100%;
-            max-width: 450px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding-bottom: 30px;
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory; /* এক ভিডিও থেকে অন্য ভিডিওতে স্ন্যাপ করবে */
+            scrollbar-width: none; /* ফায়ারফক্স স্ক্রোলবার হাইড */
         }
 
-        /* টিকটক স্টাইল ভিডিও কার্ড (লম্বা 9:16 রেশিও) */
-        .video-card {
-            background: #121212;
+        #videoFeed::-webkit-scrollbar {
+            display: none; /* ক্রোম/সাফারি স্ক্রোলবার হাইড */
+        }
+
+        /* প্রতিটি ভিডিও সেকশন পুরো স্ক্রিন জুড়ে থাকবে */
+        .video-container {
             width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #222;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
-        }
-
-        .thumbnail-container {
+            height: 100vh;
+            scroll-snap-align: start;
             position: relative;
-            width: 100%;
             background: #000;
-            aspect-ratio: 9 / 16; /* টিকটকের মতো লম্বা স্ক্রিন */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* থাম্বনেল বা ভিডিওর স্টাইল (9:16 টিকটক ফিট) */
+        .media-box {
+            width: 100%;
+            height: 100%;
+            position: relative;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .thumbnail-container img {
+        .media-box img, .media-box video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* পুরো স্ক্রিন লম্বালম্বিভাবে পূরণ করবে */
+            display: block;
         }
 
         /* প্লে বাটন ডিজাইন */
         .play-btn {
             position: absolute;
-            width: 70px;
-            height: 70px;
-            background: rgba(229, 9, 20, 0.9);
+            width: 75px;
+            height: 75px;
+            background: rgba(229, 9, 20, 0.85);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 20px rgba(229, 9, 20, 0.6);
+            z-index: 5;
             transition: transform 0.2s ease;
-        }
-
-        .thumbnail-container:hover .play-btn {
-            transform: scale(1.1);
         }
 
         .play-btn::after {
             content: '';
             width: 0;
             height: 0;
-            border-left: 22px solid #ffffff;
-            border-top: 13px solid transparent;
-            border-bottom: 13px solid transparent;
-            margin-left: 4px;
+            border-left: 24px solid #ffffff;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            margin-left: 5px;
         }
 
-        .video-info {
+        /* ভিডিওর ওপর টাইটেল ও ওভারলে */
+        .video-overlay {
+            position: absolute;
+            bottom: 30px;
+            left: 15px;
+            right: 15px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.6);
             padding: 12px 15px;
-            background: #161b22;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .video-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
-            color: #f0f6fc;
+            color: #ffffff;
             margin: 0;
-            line-height: 1.4;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
         }
 
-        /* ভিডিও প্লেয়ার স্টাইল (টিকটকের মতো সম্পূর্ণ ফিট) */
-        video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* লম্বা স্ক্রিন জুড়ে দেখাবে */
-            display: block;
+        /* হেডার লোগো বা নোটিশ (ভাসমান) */
+        .floating-header {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            background: rgba(229, 9, 20, 0.85);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            pointer-events: none;
+            backdrop-filter: blur(5px);
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>🎬 এক্সক্লুসিভ প্রাইভেট ভিডিও HUB</h1>
-        <p>⚠️ ডিলিট হওয়ার আগে জলদি দেখুন! আর কোথাও পাবেন না 🔥</p>
-    </div>
+    <div class="floating-header">🔥 এক্সক্লুসিভ প্রাইভেট ভিডিও HUB</div>
 
     <div id="videoFeed"></div>
 
@@ -157,10 +145,10 @@
             window.Telegram.WebApp.expand();
         }
 
-        // অ্যাডস্টারার ডাইরেক্ট লিংক
+        // আপনার অ্যাডস্টারার ডাইরেক্ট লিংক (পপ-আপের জন্য)
         const ADSTERRA_DIRECT_LINK = "https://www.highrevenuegate.com/your-direct-link-id";
 
-        // আপনার ভিডিও তালিকা
+        // ভিডিওর তালিকা
         const videoList = [
             {
                 title: "🔥 এক্সক্লুসিভ টিকটক ভাইরাল ভিডিও ১",
@@ -168,7 +156,7 @@
                 videoUrl: "https://files.catbox.moe/e1kn68.mp4"
             },
             {
-                title: " স্কুল গিয়ে টয়লেটে প্রেমিক প্রেমিকার ভিডিও এখুনি দেখে নাও 💋",
+                title: "স্কুল গিয়ে টয়লেটে প্রেমিক প্রেমিকার ভিডিও এখুনি দেখে নাও 💋",
                 thumbnail: "https://files.catbox.moe/ai3i9a.jpg",
                 videoUrl: "https://files.catbox.moe/nu40k0.mp4"
             }
@@ -176,42 +164,66 @@
 
         const feedContainer = document.getElementById('videoFeed');
 
+        // ভিডিও কার্ডগুলো জেনারেট করা
         videoList.forEach((video, index) => {
-            const card = document.createElement('div');
-            card.className = 'video-card';
+            const container = document.createElement('div');
+            container.className = 'video-container';
 
-            card.innerHTML = `
-                <div class="thumbnail-container" id="thumb-box-${index}" onclick="handlePlay(${index})">
+            container.innerHTML = `
+                <div class="media-box" id="media-box-${index}" onclick="handlePlay(${index})">
                     <img src="${video.thumbnail}" alt="${video.title}">
                     <div class="play-btn"></div>
                 </div>
-                <div class="video-info">
+                <div class="video-overlay">
                     <h3 class="video-title">${video.title}</h3>
                 </div>
             `;
 
-            feedContainer.appendChild(card);
+            feedContainer.appendChild(container);
         });
 
         // ক্লিক করলে অ্যাড ওপেন হবে এবং ভিডিও চালু হবে
         function handlePlay(index) {
-            // ১. অ্যাডস্টারার ডাইরেক্ট লিংকে নতুন ট্যাবে খোলা
+            // অ্যাডস্টারার পপ-আপ বা ডাইরেক্ট লিংক ট্রিগার
             if (ADSTERRA_DIRECT_LINK && ADSTERRA_DIRECT_LINK !== "") {
                 window.open(ADSTERRA_DIRECT_LINK, '_blank');
             }
 
-            // ২. থাম্বনেল সরিয়ে টিকটক স্টাইল লম্বা ভিডিও প্লেয়ার বসানো
-            const box = document.getElementById(`thumb-box-${index}`);
+            const box = document.getElementById(`media-box-${index}`);
             box.onclick = null; // বারবার ক্লিক বন্ধ করা
 
             box.innerHTML = `
-                <video src="${videoList[index].videoUrl}" controls autoplay playsinline webkit-playsinline x5-playsinline></video>
+                <video id="vid-${index}" src="${videoList[index].videoUrl}" controls autoplay playsinline webkit-playsinline x5-playsinline></video>
             `;
         }
+
+        // টিকটক স্টাইল অটো পজ (স্ক্রল করলে ওপরের ভিডিও বন্ধ হয়ে যাবে)
+        const observerOptions = {
+            root: feedContainer,
+            threshold: 0.6 // যখন ভিডিওটির ৬০% স্ক্রিনে দৃশ্যমান হবে
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const videoElement = entry.target.querySelector('video');
+                if (videoElement) {
+                    if (!entry.isIntersecting) {
+                        videoElement.pause(); // স্ক্রিন থেকে চলে গেলে ভিডিও পজ হবে
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // সব কন্টেইনার মনিটর করা
+        setTimeout(() => {
+            document.querySelectorAll('.video-container').forEach(container => {
+                observer.observe(container);
+            });
+        }, 500);
     </script>
 
     <script>
-        // স্ক্রিন ব্লার প্রটেকশন কোড
+        // স্ক্রিন ব্লার প্রটেকশন
         document.addEventListener("visibilitychange", function() {
             if (document.hidden) {
                 document.body.style.filter = "blur(25px)";
