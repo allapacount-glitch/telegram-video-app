@@ -202,24 +202,6 @@ box.innerHTML = `
             
         }
     </script>
-        <script>
-        // স্ক্রিন ব্লার প্রোটেকশন কোড
-        document.addEventListener("visibilitychange", function() {
-            if (document.hidden) {
-                document.body.style.filter = "blur(25px)";
-            } else {
-                document.body.style.filter = "none";
-            }
-        });
-
-        window.addEventListener("blur", function() {
-            document.body.style.filter = "blur(25px)";
-        });
-
-        window.addEventListener("focus", function() {
-            document.body.style.filter = "none";
-        });
-        </script>
     
 </body>
 </html>
