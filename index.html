@@ -6,38 +6,38 @@
     <title>এক্সক্লুসিভ প্রাইভেট ভিডিও HUB</title>
     <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://pl31426900.profitableratecpmnetwork.com/c0/1c/36/c01c3676384da5f3145687e4300e5055f2.js" data-cfasync="false"></script>
-    <script src="https://pl31426998.profitableratecpmnetwork.com/16/30/4d/16304d490aba50e69dd23501a07794.js" data-cfasync="false"></script>
+    
+    <!-- Adsterra Weblinks (Head Section) -->
+    <script src="https://pl31426899.profitableratecpmnetwork.com/c0/1c/36/c01c3676384da5145687e4306e5055f2.js" data-cfasync="false"></script>
+    <script src="https://pl31426900.profitableratecpmnetwork.com/16/30/4d/16304ded490aba50e69dd23501a07794.js" data-cfasync="false"></script>
 
     <style>
-        /* টিকটক স্টাইল ফুল স্ক্রিন স্ন্যাপ ফিড */
+        /* প্রিমিয়াম টিকটক স্টাইল ফুল স্ক্রিন স্ন্যাপ ফিড */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: #000000;
+            background-color: #050505;
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            overflow: hidden; /* মেইন পেজ স্ক্রল বন্ধ রেখে ফিড স্ক্রল চালু রাখা */
+            overflow: hidden;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* টিকটক স্টাইল ফুলস্ক্রিন ফিড কন্টেইনার */
         #videoFeed {
             width: 100%;
             height: 100vh;
             overflow-y: scroll;
-            scroll-snap-type: y mandatory; /* এক ভিডিও থেকে অন্য ভিডিওতে স্ন্যাপ করবে */
-            scrollbar-width: none; /* ফায়ারফক্স স্ক্রোলবার হাইড */
+            scroll-snap-type: y mandatory;
+            scrollbar-width: none;
         }
 
         #videoFeed::-webkit-scrollbar {
-            display: none; /* ক্রোম/সাফারি স্ক্রোলবার হাইড */
+            display: none;
         }
 
-        /* প্রতিটি ভিডিও সেকশন পুরো স্ক্রিন জুড়ে থাকবে */
         .video-container {
             width: 100%;
             height: 100vh;
@@ -49,7 +49,6 @@
             justify-content: center;
         }
 
-        /* থাম্বনেল বা ভিডিওর স্টাইল (9:16 টিকটক ফিট) */
         .media-box {
             width: 100%;
             height: 100%;
@@ -63,73 +62,85 @@
         .media-box img, .media-box video {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* পুরো স্ক্রিন লম্বালম্বিভাবে পূরণ করবে */
+            object-fit: cover;
             display: block;
         }
 
-        /* প্লে বাটন ডিজাইন */
+        /* প্রিমিয়াম গ্লাস ইফেক্ট প্লে বাটন */
         .play-btn {
             position: absolute;
-            width: 75px;
-            height: 75px;
+            width: 80px;
+            height: 80px;
             background: rgba(229, 9, 20, 0.85);
+            backdrop-filter: blur(10px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.6);
+            box-shadow: 0 8px 32px rgba(229, 9, 20, 0.5);
             z-index: 5;
-            transition: transform 0.2s ease;
+            transition: transform 0.25s ease, background 0.25s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .media-box:hover .play-btn {
+            transform: scale(1.08);
+            background: rgba(229, 9, 20, 0.95);
         }
 
         .play-btn::after {
             content: '';
             width: 0;
             height: 0;
-            border-left: 24px solid #ffffff;
-            border-top: 14px solid transparent;
-            border-bottom: 14px solid transparent;
-            margin-left: 5px;
+            border-left: 26px solid #ffffff;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 6px;
         }
 
-        /* ভিডিওর ওপর টাইটেল ও ওভারলে */
+        /* প্রিমিয়াম গ্লাসমরফিজম ওভারলে */
         .video-overlay {
             position: absolute;
-            bottom: 30px;
+            bottom: 35px;
             left: 15px;
             right: 15px;
             z-index: 10;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 12px 15px;
-            border-radius: 12px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(20, 20, 20, 0.65);
+            padding: 16px 18px;
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .video-title {
             font-size: 15px;
             font-weight: 600;
-            color: #ffffff;
+            color: #f0f6fc;
             margin: 0;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            line-height: 1.4;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
 
-        /* হেডার লোগো বা নোটিশ (ভাসমান) */
+        /* প্রফেশনাল হেডার ব্যাজ */
         .floating-header {
             position: absolute;
-            top: 10px;
+            top: 12px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 20;
             background: rgba(229, 9, 20, 0.85);
-            padding: 6px 15px;
+            backdrop-filter: blur(10px);
+            padding: 7px 18px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 700;
             color: #fff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             pointer-events: none;
-            backdrop-filter: blur(5px);
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -145,8 +156,11 @@
             window.Telegram.WebApp.expand();
         }
 
-        // আপনার অ্যাডস্টারার ডাইরেক্ট লিংক (পপ-আপের জন্য)
-        const ADSTERRA_DIRECT_LINK = "https://www.highrevenuegate.com/your-direct-link-id";
+        // আপনার প্রদান করা দুটি অ্যাডস্টারার ডাইরেক্ট লিংক
+        const DIRECT_LINKS = [
+            "https://www.profitableratecpmnetwork.com/f2j8mtn8qv?key=63fa3c81a5f4463c442f67a0175b62a4",
+            "https://www.profitableratecpmnetwork.com/fjgruvdg6u?key=9f72011975068f62cee154b648c9e44a"
+        ];
 
         // ভিডিওর তালিকা
         const videoList = [
@@ -164,7 +178,7 @@
 
         const feedContainer = document.getElementById('videoFeed');
 
-        // ভিডিও কার্ডগুলো জেনারেট করা
+        // ভিডিও কার্ড জেনারেটর
         videoList.forEach((video, index) => {
             const container = document.createElement('div');
             container.className = 'video-container';
@@ -182,25 +196,27 @@
             feedContainer.appendChild(container);
         });
 
-        // ক্লিক করলে অ্যাড ওপেন হবে এবং ভিডিও চালু হবে
+        // ক্লিক করলে দুটি ডাইরেক্ট লিংক থেকে অল্টারনেট বা একসাথে ট্রিগার হবে এবং ভিডিও চালু হবে
         function handlePlay(index) {
-            // অ্যাডস্টারার পপ-আপ বা ডাইরেক্ট লিংক ট্রিগার
-            if (ADSTERRA_DIRECT_LINK && ADSTERRA_DIRECT_LINK !== "") {
-                window.open(ADSTERRA_DIRECT_LINK, '_blank');
-            }
+            // ইউজার ক্লিকের মাধ্যমে ডাইরেক্ট লিংক ওপেন করা
+            DIRECT_LINKS.forEach(link => {
+                if (link) {
+                    window.open(link, '_blank');
+                }
+            });
 
             const box = document.getElementById(`media-box-${index}`);
-            box.onclick = null; // বারবার ক্লিক বন্ধ করা
+            box.onclick = null; // ডাবল ক্লিক রোধ করতে
 
             box.innerHTML = `
                 <video id="vid-${index}" src="${videoList[index].videoUrl}" controls autoplay playsinline webkit-playsinline x5-playsinline></video>
             `;
         }
 
-        // টিকটক স্টাইল অটো পজ (স্ক্রল করলে ওপরের ভিডিও বন্ধ হয়ে যাবে)
+        // টিকটক স্টাইল অটো পজ (স্ক্রল করলে ওপরের ভিডিও বন্ধ হবে)
         const observerOptions = {
             root: feedContainer,
-            threshold: 0.6 // যখন ভিডিওটির ৬০% স্ক্রিনে দৃশ্যমান হবে
+            threshold: 0.6
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -208,13 +224,12 @@
                 const videoElement = entry.target.querySelector('video');
                 if (videoElement) {
                     if (!entry.isIntersecting) {
-                        videoElement.pause(); // স্ক্রিন থেকে চলে গেলে ভিডিও পজ হবে
+                        videoElement.pause();
                     }
                 }
             });
         }, observerOptions);
 
-        // সব কন্টেইনার মনিটর করা
         setTimeout(() => {
             document.querySelectorAll('.video-container').forEach(container => {
                 observer.observe(container);
