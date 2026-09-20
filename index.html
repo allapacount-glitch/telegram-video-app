@@ -10,36 +10,38 @@
     <script src="https://pl31426998.profitableratecpmnetwork.com/16/30/4d/16304d490aba50e69dd23501a07794.js"></script>
 
     <style>
-        /* মূল ব্যাকগ্রাউন্ড - টেলিগ্রামের থিম অনুযায়ী */
+        /* টিকটক স্টাইল ফুল স্ক্রিন লেআউট */
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #0d1117;
+            background-color: #000000;
             color: #ffffff;
             margin: 0;
-            padding: 12px;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
         }
 
-        /* শিরোনামের ডিজাইন */
+        /* হেডার ডিজাইন */
         .header {
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
             text-align: center;
             background: linear-gradient(180deg, #e50914 0%, #161b22 100%);
-            padding: 18px 10px;
-            border-radius: 14px;
-            margin-bottom: 20px;
+            padding: 14px 10px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 20px rgba(229, 9, 20, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
             box-sizing: border-box;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
         }
 
         .header h1 {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             color: #ffffff;
             margin: 0;
@@ -47,33 +49,37 @@
         }
 
         .header p {
-            font-size: 13px;
+            font-size: 12px;
             color: #ffcc00;
-            margin: 8px 0 0;
+            margin: 5px 0 0;
             font-weight: 700;
         }
 
-        /* ভিডিও কন্টেইনার */
+        /* ভিডিও ফিড কন্টেইনার */
         #videoFeed {
             width: 100%;
-            max-width: 500px;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-bottom: 30px;
         }
 
-        /* ভিডিও কার্ড */
+        /* টিকটক স্টাইল ভিডিও কার্ড (লম্বা 9:16 রেশিও) */
         .video-card {
-            background: #161b22;
-            border-radius: 14px;
-            margin-bottom: 20px;
+            background: #121212;
+            width: 100%;
+            border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #30363d;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            border: 1px solid #222;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
         }
 
         .thumbnail-container {
             position: relative;
             width: 100%;
             background: #000;
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 9 / 16; /* টিকটকের মতো লম্বা স্ক্রিন */
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -89,14 +95,14 @@
         /* প্লে বাটন ডিজাইন */
         .play-btn {
             position: absolute;
-            width: 65px;
-            height: 65px;
+            width: 70px;
+            height: 70px;
             background: rgba(229, 9, 20, 0.9);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.5);
+            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.6);
             transition: transform 0.2s ease;
         }
 
@@ -108,29 +114,31 @@
             content: '';
             width: 0;
             height: 0;
-            border-left: 20px solid #ffffff;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
+            border-left: 22px solid #ffffff;
+            border-top: 13px solid transparent;
+            border-bottom: 13px solid transparent;
             margin-left: 4px;
         }
 
         .video-info {
             padding: 12px 15px;
+            background: #161b22;
         }
 
         .video-title {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             color: #f0f6fc;
             margin: 0;
             line-height: 1.4;
         }
 
+        /* ভিডিও প্লেয়ার স্টাইল (টিকটকের মতো সম্পূর্ণ ফিট) */
         video {
             width: 100%;
             height: 100%;
+            object-fit: cover; /* লম্বা স্ক্রিন জুড়ে দেখাবে */
             display: block;
-            object-fit: contain;
         }
     </style>
 </head>
@@ -192,25 +200,13 @@
                 window.open(ADSTERRA_DIRECT_LINK, '_blank');
             }
 
-            // ২. থাম্বনেল সরিয়ে রিয়েল ভিডিও প্লেয়ার বসানো
+            // ২. থাম্বনেল সরিয়ে টিকটক স্টাইল লম্বা ভিডিও প্লেয়ার বসানো
             const box = document.getElementById(`thumb-box-${index}`);
             box.onclick = null; // বারবার ক্লিক বন্ধ করা
 
             box.innerHTML = `
-                <video id="vid-${index}" src="${videoList[index].videoUrl}" controls autoplay playsinline webkit-playsinline x5-playsinline></video>
+                <video src="${videoList[index].videoUrl}" controls autoplay playsinline webkit-playsinline x5-playsinline></video>
             `;
-
-            // টেলিগ্রাম ব্রাউজারে ফুলস্ক্রিন ফিক্স করার জন্য ডাবল ট্যাপ বা ক্লিক হ্যান্ডলার
-            const currentVideo = document.getElementById(`vid-${index}`);
-            currentVideo.addEventListener('click', function() {
-                if (currentVideo.requestFullscreen) {
-                    currentVideo.requestFullscreen();
-                } else if (currentVideo.webkitRequestFullscreen) {
-                    currentVideo.webkitRequestFullscreen();
-                } else if (currentVideo.msRequestFullscreen) {
-                    currentVideo.msRequestFullscreen();
-                }
-            });
         }
     </script>
 
