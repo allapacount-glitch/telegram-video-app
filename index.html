@@ -193,11 +193,12 @@
 
             // ২. থাম্বনেইল সরিয়ে রিয়েল ভিডিও প্লেয়ার বসানো
             const box = document.getElementById(`thumb-box-${index}`);
-            box.onclick = null; // বারবার ক্লিক বন্ধ করা
+box.onclick = null; // বারবার ক্লিক বন্ধ করা
 
-            box.innerHTML = `
+box.innerHTML = `
     <video src="${videoList[index].videoUrl}" controls autoplay playsinline webkit-playsinline x5-playsinline style="width:100%; height:100%; object-fit:contain;"></video>
 `;
+            
             
         }
     </script>
