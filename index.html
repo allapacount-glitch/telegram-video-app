@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Viral Video Hub</title>
+    <title>Exclusive Video Hub</title>
     <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-        <style>
-        /* মূল ব্যাকগ্রাউন্ড - প্রিমিয়াম ডার্ক থিম */
+    <style>
+        /* মূল ব্যাকগ্রাউন্ড - প্রিমিয়াম ডার্ক মুভি থিম */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #0b0e14;
+            background-color: #0d1117;
             color: #ffffff;
             margin: 0;
             padding: 12px;
@@ -21,17 +21,18 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* সিনেমাটিক রেড অ্যান্ড ব্ল্যাক হেডার */
+        /* সিনেমাটিক হেডার */
         .header {
             width: 100%;
             max-width: 500px;
             text-align: center;
-            background: linear-gradient(180deg, #e50914 0%, #11141d 100%);
+            background: linear-gradient(180deg, #e50914 0%, #161b22 100%);
             padding: 18px 10px;
             border-radius: 14px;
             margin-bottom: 20px;
             box-shadow: 0 4px 20px rgba(229, 9, 20, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            box-sizing: border-box;
         }
 
         .header h1 {
@@ -40,30 +41,29 @@
             color: #ffffff;
             margin: 0;
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-            letter-spacing: 0.5px;
         }
 
         .header p {
             font-size: 13px;
-            color: #ffcc00; /* উজ্জ্বল গোল্ডেন ওয়ার্নিং */
+            color: #ffcc00;
             margin: 6px 0 0 0;
             font-weight: 700;
         }
 
-        /* ভিডিও ফিড লিস্ট */
-        #videoFeed, .video-feed {
+        /* ভিডিও কন্টেইনার */
+        #videoFeed {
             width: 100%;
             max-width: 500px;
         }
 
-        /* সুন্দর প্রিমিয়াম কার্ড স্টাইল */
+        /* প্রিমিয়াম ভিডিও কার্ড */
         .video-card {
-            background: #151922;
+            background: #161b22;
             border-radius: 14px;
             margin-bottom: 18px;
             overflow: hidden;
-            border: 1px solid #232936;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            border: 1px solid #30363d;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
 
         .thumbnail-container {
@@ -71,43 +71,72 @@
             width: 100%;
             background: #000;
             aspect-ratio: 16 / 9;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .thumbnail-container img, 
-        .thumbnail-container video {
+        .thumbnail-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
 
+        /* সুন্দর প্লে বোতাম */
+        .play-btn {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            background: rgba(229, 9, 20, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.6);
+            transition: transform 0.2s;
+        }
+
+        .play-btn::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 16px solid #ffffff;
+            margin-left: 4px;
+        }
+
         .video-info {
             padding: 12px 15px;
-            background: #151922;
+            background: #161b22;
         }
 
         .video-title {
             font-size: 14px;
             font-weight: 600;
-            color: #e2e8f0;
+            color: #f0f6fc;
             margin: 0;
             line-height: 1.4;
         }
-        </style>
-    
- 
+
+        video {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
     <div class="header">
-        <h1> Viral Video Hub 🎬</h1>
+        <h1>🎬 এক্সক্লুসিভ প্রাইভেট ভিডিও HUB</h1>
+        <p>⚠️ ডিলিট হওয়ার আগে জলদি দেখুন! আর কোথাও পাবেন না 🔥</p>
     </div>
 
-    <!-- Video Feed List -->
-    <div class="video-feed" id="videoFeed"></div>
+    <div id="videoFeed"></div>
 
     <script>
         if (window.Telegram && window.Telegram.WebApp) {
@@ -115,12 +144,10 @@
             window.Telegram.WebApp.expand();
         }
 
-        // Adsterra Direct Link
-        const ADSTERRA_DIRECT_LINK = "https://www.profitableratecpmnetwork.com/f2j8mtn8qv?key=63fa3c81a5f4463c442f67a0175b62a4";
+        // অ্যাডস্টারার ডাইরেক্ট লিংক (আপনার লিংক)
+        const ADSTERRA_DIRECT_LINK = "https://www.highrevenuegate.com/your-direct-link-id"; 
 
-        // ==========================================
-        // 🎬 ভিডিও লিস্ট (এখানে নতুন ভিডিও যোগ করবেন)
-        // ==========================================
+        // আপনার ভিডিও তালিকা
         const videoList = [
             {
                 title: "🔥 এক্সক্লুসিভ টিকটক ভাইরাল ভিডিও ১",
@@ -128,45 +155,44 @@
                 videoUrl: "https://files.catbox.moe/e1kn68.mp4"
             },
             {
-                title: "🫦",
-                thumbnail: "",
-                videoUrl: ""
+                title: "🎬 ট্রেন্ডিং ভিডিও ক্লিপ ২",
+                thumbnail: "https://picsum.photos/600/340?random=2",
+                videoUrl: "https://files.catbox.moe/e1kn68.mp4"
             }
         ];
 
-        // Render Videos Automatically
         const feedContainer = document.getElementById('videoFeed');
 
         videoList.forEach((video, index) => {
             const card = document.createElement('div');
             card.className = 'video-card';
+
             card.innerHTML = `
-                <div class="thumbnail-container" id="container-${index}">
-                    <img src="${video.thumbnail}" alt="Thumbnail">
-                    <button class="play-btn" onclick="playVideo(${index})">▶</button>
+                <div class="thumbnail-container" id="thumb-box-${index}" onclick="handlePlay(${index})">
+                    <img src="${video.thumbnail}" alt="${video.title}">
+                    <div class="play-btn"></div>
                 </div>
                 <div class="video-info">
-                    <div class="video-title">${video.title}</div>
+                    <h3 class="video-title">${video.title}</h3>
                 </div>
             `;
+
             feedContainer.appendChild(card);
         });
 
-        function playVideo(index) {
-            // Open Adsterra Ad
-            if (ADSTERRA_DIRECT_LINK !== "") {
+        // ক্লিক করলে অ্যাড ওপেন হবে এবং ভিডিও চালু হবে
+        function handlePlay(index) {
+            // ১. অ্যাডস্টারার ডাইরেক্ট লিংক নতুন ট্যাবে খোলা
+            if (ADSTERRA_DIRECT_LINK && ADSTERRA_DIRECT_LINK !== "") {
                 window.open(ADSTERRA_DIRECT_LINK, '_blank');
             }
 
-            // Replace Thumbnail with Video
-            const container = document.getElementById(`container-${index}`);
-            const videoData = videoList[index];
+            // ২. থাম্বনেইল সরিয়ে রিয়েল ভিডিও প্লেয়ার বসানো
+            const box = document.getElementById(`thumb-box-${index}`);
+            box.onclick = null; // বারবার ক্লিক বন্ধ করা
 
-            container.innerHTML = `
-                <video controls autoplay style="width:100%; height:100%;">
-                    <source src="${videoData.videoUrl}" type="video/mp4">
-                    Your browser does not support video.
-                </video>
+            box.innerHTML = `
+                <video src="${videoList[index].videoUrl}" controls autoplay playsinline></video>
             `;
         }
     </script>
