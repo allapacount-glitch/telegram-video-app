@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ariful - Bio Page</title>
+    <!-- FontAwesome Icons for Social Media Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -19,9 +21,10 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
         .bio-card {
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 41, 59, 0.75);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 40px 30px;
@@ -29,8 +32,9 @@
             text-align: center;
             width: 100%;
             max-width: 380px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1s ease-in-out forwards;
+            position: relative;
         }
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(20px) scale(0.97); }
@@ -48,13 +52,19 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #38bdf8;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+            animation: pulseGlow 3s infinite alternate;
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(56, 189, 248, 0.7); }
         }
         h1 {
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 8px;
             color: #ffffff;
+            letter-spacing: 0.5px;
         }
         p {
             font-size: 14px;
@@ -65,51 +75,82 @@
         .social-links {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 16px;
         }
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 12px;
             background: rgba(255, 255, 255, 0.05);
             color: #ffffff;
-            padding: 14px 20px;
+            padding: 15px 20px;
             border-radius: 14px;
             text-decoration: none;
             font-weight: 600;
             font-size: 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        .btn i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+        /* Hover & Animation Effects */
         .btn:hover {
             background: linear-gradient(135deg, #0284c7, #38bdf8);
-            border-color: transparent;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
+            border-color: #38bdf8;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+        }
+        .btn:hover i {
+            transform: scale(1.2) rotate(8deg);
+        }
+        /* Shimmer animation sweep on hover */
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(30deg) translateX(-100%);
+            transition: transform 0.7s ease-in-out;
+        }
+        .btn:hover::after {
+            transform: rotate(30deg) translateX(100%);
         }
     </style>
 </head>
 <body>
 
     <div class="bio-card">
-        <!-- আপনার প্রোফাইল ছবির লিংক এখানে দিন -->
+        <!-- আপনার প্রোফাইল ছবি -->
         <div class="profile-img-container">
-                <img src="https://files.catbox.moe/b7wrl2.jpg" alt="Profile" class="profile-img">
-            
+            <img src="https://files.catbox.moe/b7wr12.jpg" alt="Profile" class="profile-img">
         </div>
-        
+
         <!-- আপনার নাম -->
         <h1>ARIFUL-CEO</h1>
-        
-        <!-- আপনার বায়ো বা পরিচয় -->
-        <p>financial market Legend 💸Stock Trading \ Forex Training / Binary Trading / crypto trading 💝</p>
 
-        <!-- সোশ্যাল মিডিয়া বাটনগুলো -->
+        <!-- আপনার বায়ো বা পরিচয় -->
+        <p>financial market Legend 💹 Stock Trading \ Forex Training / Binary Trading / crypto trading 💝</p>
+
+        <!-- সোশ্যাল মিডিয়া বাটনসমূহ -->
         <div class="social-links">
-            <a href="https://x.com/arifull72" class="btn" target="_blank">X</a>
-            <a href="https://t.me/xarifulofficial" class="btn" target="_blank">Telegram</a>
-            <a href="https://youtube.com/@xarifull?si=_nhcjkyg5d1vWry2" class="btn" target="_blank">YouTube</a>
+            <a href="https://x.com/ariful172" class="btn" target="_blank">
+                <i class="fa-brands fa-x-twitter"></i> X (Twitter)
+            </a>
+            <a href="https://t.me/xarifulofficial" class="btn" target="_blank">
+                <i class="fa-brands fa-telegram"></i> Telegram
+            </a>
+            <a href="https://youtube.com/@xariful7si=_rhcjk ygSdlvery2" class="btn" target="_blank">
+                <i class="fa-brands fa-youtube"></i> YouTube
+            </a>
         </div>
     </div>
 
