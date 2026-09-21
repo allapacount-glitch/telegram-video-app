@@ -21,11 +21,12 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            overflow: hidden;
         }
         
-        /* মূল বায়ো কার্ড যার চারপাশ দিয়ে লাইভ অ্যানিমেশন হবে */
+        /* লিংকে ঢুকলে সুন্দর এন্ট্রান্স অ্যানিমেশন সহ লাইভ রানিং বর্ডার */
         .bio-card {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(20px);
             padding: 40px 25px;
             border-radius: 30px;
@@ -35,19 +36,24 @@
             position: relative;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
             
-            /* মেইন কার্ডের রানিং বর্ডার অ্যানিমেশন */
-            border: 2px solid transparent;
-            background-image: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), linear-gradient(90deg, #38bdf8, #818cf8, #c084fc, #38bdf8);
+            /* এন্ট্রান্স ও লাইভ বর্ডার একসাথে */
+            border: 3px solid transparent;
+            background-image: linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)), linear-gradient(90deg, #38bdf8, #ec4899, #8b5cf6, #38bdf8);
             background-origin: border-box;
             background-clip: padding-box, border-box;
-            background-size: 300% 300%;
-            animation: borderAnimation 6s ease infinite;
+            background-size: 400% 400%;
+            animation: pageEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards, liveBorder 3s linear infinite;
         }
 
-        @keyframes borderAnimation {
+        @keyframes pageEntrance {
+            0% { opacity: 0; transform: translateY(40px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes liveBorder {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
         }
 
         /* প্রোফাইল ছবি */
@@ -56,6 +62,11 @@
             width: 110px;
             height: 110px;
             margin: 0 auto 20px;
+            animation: fadeInImage 1.5s ease;
+        }
+        @keyframes fadeInImage {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
         }
         .profile-img {
             width: 110px !important;
@@ -91,7 +102,7 @@
             align-items: center;
             justify-content: center;
             gap: 14px;
-            background: rgba(30, 41, 59, 0.7);
+            background: rgba(30, 41, 59, 0.85);
             color: #ffffff;
             padding: 16px 20px;
             border-radius: 16px;
@@ -100,16 +111,16 @@
             font-size: 15px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-            /* প্রতিটি সোশ্যাল বক্সের চারপাশে লাইভ রানিং বর্ডার অ্যানিমেশন */
+            /* সোশ্যাল বক্সগুলোর চারপাশে লাইভ রানিং বর্ডার অ্যানিমেশন */
             border: 2px solid transparent;
-            background-image: linear-gradient(rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.8)), linear-gradient(120deg, #38bdf8, #ec4899, #8b5cf6, #38bdf8);
+            background-image: linear-gradient(rgba(30, 41, 59, 0.9), rgba(30, 41, 59, 0.9)), linear-gradient(90deg, #38bdf8, #229ED9, #FF0000, #38bdf8);
             background-origin: border-box;
             background-clip: padding-box, border-box;
-            background-size: 300% 300%;
-            animation: borderAnimation 4s linear infinite;
+            background-size: 400% 400%;
+            animation: liveBorder 4s linear infinite;
         }
 
         .btn i {
@@ -123,7 +134,7 @@
         /* হোভার করলে ইফেক্ট */
         .btn:hover {
             transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.5);
         }
         .btn:hover i {
             transform: scale(1.2);
@@ -153,7 +164,7 @@
             <a href="https://t.me/xarifulofficial" class="btn" target="_blank">
                 <i class="fa-brands fa-telegram"></i> Telegram
             </a>
-            <a href="https://youtube.com/@xariful7si=_rhcjk ygSdlvery2" class="btn" target="_blank">
+            <a href="https://youtube.com/@ariful7si=_rhcjk ygSdlvery2" class="btn" target="_blank">
                 <i class="fa-brands fa-youtube"></i> YouTube
             </a>
         </div>
