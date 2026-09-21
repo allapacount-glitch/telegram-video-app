@@ -28,7 +28,7 @@
         .bio-card {
             background: rgba(15, 23, 42, 0.92);
             backdrop-filter: blur(20px);
-            padding: 40px 25px;
+            padding: 35px 25px;
             border-radius: 30px;
             text-align: center;
             width: 100%;
@@ -58,9 +58,9 @@
         /* প্রোফাইল ছবি */
         .profile-img-container {
             position: relative;
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 20px;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
             animation: fadeInImage 1.5s ease;
         }
         @keyframes fadeInImage {
@@ -68,8 +68,8 @@
             100% { opacity: 1; transform: scale(1); }
         }
         .profile-img {
-            width: 110px !important;
-            height: 110px !important;
+            width: 100px !important;
+            height: 100px !important;
             border-radius: 50% !important;
             object-fit: cover !important;
             border: 3px solid #38bdf8;
@@ -77,43 +77,43 @@
         }
 
         h1 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #ffffff;
             letter-spacing: 0.5px;
         }
         p {
-            font-size: 13.5px;
+            font-size: 13px;
             color: #94a3b8;
-            margin-bottom: 25px;
-            line-height: 1.6;
+            margin-bottom: 22px;
+            line-height: 1.5;
         }
 
-        /* সোশ্যাল মিডিয়া বক্স বাটনসমূহ */
+        /* সোশ্যাল মিডিয়া বক্স বাটনসমূহ - সমান দূরত্ব ও সাইজ নিশ্চিত করা হয়েছে */
         .social-links {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
+            gap: 12px;
             background: rgba(30, 41, 59, 0.85);
             color: #ffffff;
-            padding: 15px 20px;
-            border-radius: 16px;
+            height: 50px;
+            border-radius: 14px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14.5px;
             position: relative;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-            /* সোশ্যাল বক্সগুলোর চারপাশে লাইভ রানিং বর্ডার অ্যানিমেশন */
+            /* সোশ্যাল বক্সগুলোর লাইভ রানিং বর্ডার অ্যানিমেশন */
             border: 2px solid transparent;
             background-image: linear-gradient(rgba(30, 41, 59, 0.9), rgba(30, 41, 59, 0.9)), linear-gradient(90deg, #38bdf8, #229ED9, #FF0000, #38bdf8);
             background-origin: border-box;
@@ -123,7 +123,9 @@
         }
 
         .btn i {
-            font-size: 20px;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
         }
         /* ব্র্যান্ড আইকন কালার */
         .btn .fa-x-twitter { color: #ffffff; }
@@ -133,11 +135,11 @@
 
         /* হোভার করলে ইফেক্ট */
         .btn:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.5);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
         }
         .btn:hover i {
-            transform: scale(1.2);
+            transform: scale(1.15);
             transition: transform 0.3s ease;
         }
     </style>
