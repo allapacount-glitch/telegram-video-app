@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ariful - Bio Page</title>
-    <!-- FontAwesome Icons for Social Media Icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,32 +14,43 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            background: linear-gradient(135deg, #090d16, #111827);
             color: #f8fafc;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            overflow-x: hidden;
         }
+        
+        /* মূল বায়ো কার্ড যার চারপাশ দিয়ে লাইভ অ্যানিমেশন হবে */
         .bio-card {
-            background: rgba(30, 41, 59, 0.75);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 30px;
-            border-radius: 24px;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 40px 25px;
+            border-radius: 30px;
             text-align: center;
             width: 100%;
             max-width: 380px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 1s ease-in-out forwards;
             position: relative;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+            
+            /* মেইন কার্ডের রানিং বর্ডার অ্যানিমেশন */
+            border: 2px solid transparent;
+            background-image: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), linear-gradient(90deg, #38bdf8, #818cf8, #c084fc, #38bdf8);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            background-size: 300% 300%;
+            animation: borderAnimation 6s ease infinite;
         }
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(20px) scale(0.97); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+
+        @keyframes borderAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
+
+        /* প্রোফাইল ছবি */
         .profile-img-container {
             position: relative;
             width: 110px;
@@ -47,18 +58,14 @@
             margin: 0 auto 20px;
         }
         .profile-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
+            width: 110px !important;
+            height: 110px !important;
+            border-radius: 50% !important;
+            object-fit: cover !important;
             border: 3px solid #38bdf8;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
-            animation: pulseGlow 3s infinite alternate;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
         }
-        @keyframes pulseGlow {
-            0% { box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
-            100% { box-shadow: 0 0 30px rgba(56, 189, 248, 0.7); }
-        }
+
         h1 {
             font-size: 24px;
             font-weight: 700;
@@ -67,11 +74,13 @@
             letter-spacing: 0.5px;
         }
         p {
-            font-size: 14px;
+            font-size: 13.5px;
             color: #94a3b8;
             margin-bottom: 30px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
+
+        /* সোশ্যাল মিডিয়া বক্স বাটনসমূহ */
         .social-links {
             display: flex;
             flex-direction: column;
@@ -81,66 +90,62 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            background: rgba(255, 255, 255, 0.05);
+            gap: 14px;
+            background: rgba(30, 41, 59, 0.7);
             color: #ffffff;
-            padding: 15px 20px;
-            border-radius: 14px;
+            padding: 16px 20px;
+            border-radius: 16px;
             text-decoration: none;
             font-weight: 600;
             font-size: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+
+            /* প্রতিটি সোশ্যাল বক্সের চারপাশে লাইভ রানিং বর্ডার অ্যানিমেশন */
+            border: 2px solid transparent;
+            background-image: linear-gradient(rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.8)), linear-gradient(120deg, #38bdf8, #ec4899, #8b5cf6, #38bdf8);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            background-size: 300% 300%;
+            animation: borderAnimation 4s linear infinite;
         }
+
         .btn i {
-            font-size: 18px;
-            transition: transform 0.3s ease;
+            font-size: 20px;
         }
-        /* Hover & Animation Effects */
+        /* ব্র্যান্ড আইকন কালার */
+        .btn .fa-x-twitter { color: #ffffff; }
+        .btn .fa-telegram { color: #229ED9; }
+        .btn .fa-youtube { color: #FF0000; }
+
+        /* হোভার করলে ইফেক্ট */
         .btn:hover {
-            background: linear-gradient(135deg, #0284c7, #38bdf8);
-            border-color: #38bdf8;
             transform: translateY(-4px) scale(1.02);
             box-shadow: 0 10px 25px rgba(56, 189, 248, 0.4);
         }
         .btn:hover i {
-            transform: scale(1.2) rotate(8deg);
-        }
-        /* Shimmer animation sweep on hover */
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(30deg) translateX(-100%);
-            transition: transform 0.7s ease-in-out;
-        }
-        .btn:hover::after {
-            transform: rotate(30deg) translateX(100%);
+            transform: scale(1.2);
+            transition: transform 0.3s ease;
         }
     </style>
 </head>
 <body>
 
     <div class="bio-card">
-        <!-- আপনার প্রোফাইল ছবি -->
+        <!-- প্রোফাইল ছবি -->
         <div class="profile-img-container">
             <img src="https://files.catbox.moe/b7wr12.jpg" alt="Profile" class="profile-img">
         </div>
 
-        <!-- আপনার নাম -->
+        <!-- নাম -->
         <h1>ARIFUL-CEO</h1>
 
-        <!-- আপনার বায়ো বা পরিচয় -->
+        <!-- বায়ো -->
         <p>financial market Legend 💹 Stock Trading \ Forex Training / Binary Trading / crypto trading 💝</p>
 
-        <!-- সোশ্যাল মিডিয়া বাটনসমূহ -->
+        <!-- সোশ্যাল মিডিয়া বক্স -->
         <div class="social-links">
             <a href="https://x.com/ariful172" class="btn" target="_blank">
                 <i class="fa-brands fa-x-twitter"></i> X (Twitter)
